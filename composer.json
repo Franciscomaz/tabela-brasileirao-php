@@ -1,0 +1,18 @@
+{
+    "name": "mazzuco/tabela-brasileirao",
+    "description": "Biblioteca para manipula\u0000\u0000o dos dados do brasileir\u0000o",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Francisco Mazzuco",
+            "email": "chicomazfilho@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {"Brasileirao\\": "src/"}
+    }
+}

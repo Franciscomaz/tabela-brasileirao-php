@@ -1,0 +1,53 @@
+{% extends 'layouts/interna.twig' %}
+
+{% block conteudo %}
+    <style>
+        .tbnet-link {
+            display: none
+        }
+    </style>
+    <div id="conteudoPrincipal">
+        <h2 class="titulo"><strong>Brasileirão Série B</strong></h2>
+        <div class="overflow-scroll">
+            <table class="table-bordered tabela-braseileirao">
+                <thead>
+                <tr class="tabela-braseileirao__topo">
+                    <th colspan="2">Classificação</th>
+                    <th scope="col" class="text-center">P</th>
+                    <th scope="col" class="text-center">V</th>
+                    <th scope="col" class="text-center">E</th>
+                    <th scope="col" class="text-center">D</th>
+                    <th scope="col" class="text-center">J</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for dado in dados %}
+                    {% if dado.posicao >= 17 %}
+                        <tr class="tabela-braseileirao__dados-time">
+                        <td class="text-danger tabela-braseileirao__posicao">{{ dado.posicao }}</td>
+                    {% elseif dado.posicao <= 4 %}
+                        <tr class="tabela-braseileirao__dados-time">
+                        <td class="text-success tabela-braseileirao__posicao">{{ dado.posicao }}</td>
+                    {% else %}
+                        <tr class="tabela-braseileirao__dados-time">
+                        <td class="tabela-braseileirao__posicao">{{ dado.posicao }}</td>
+                    {% endif %}
+                    <td><img class="tabela-braseileirao__escudo img-fluid" src="{{ dado.escudo }}" alt=""> {{ dado.nome }}</td>
+                    <td class="tabela-braseileirao__pontos coluna-cinza">{{ dado.pontos }}</td>
+                    <td class="text-center">{{ dado.vitorias }}</td>
+                    <td class="coluna-cinza">{{ dado.empates }}</td>
+                    <td class="text-center">{{ dado.posicao }}</td>
+                    <td class="coluna-cinza">{{ dado.jogos }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+{% endblock %}
+
+{% block lateral %}
+    {% include 'noticias/cards.twig' %}
+{% endblock %}
