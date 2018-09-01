@@ -1,11 +1,6 @@
 {% extends 'layouts/interna.twig' %}
 
 {% block conteudo %}
-    <style>
-        .tbnet-link {
-            display: none
-        }
-    </style>
     <div id="conteudoPrincipal">
         <h2 class="titulo"><strong>Brasileirão Série B</strong></h2>
         <div class="overflow-scroll">
@@ -36,7 +31,7 @@
                     <td class="tabela-braseileirao__pontos coluna-cinza">{{ dado.pontos }}</td>
                     <td class="text-center">{{ dado.vitorias }}</td>
                     <td class="coluna-cinza">{{ dado.empates }}</td>
-                    <td class="text-center">{{ dado.posicao }}</td>
+                    <td class="text-center">{{ dado.derrotas }}</td>
                     <td class="coluna-cinza">{{ dado.jogos }}</td>
 
                     </tr>

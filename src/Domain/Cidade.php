@@ -1,6 +1,6 @@
 <?php
 
-namespace Brasileirao\Tabela;
+namespace Brasileirao\Domain;
 
 class Cidade
 {

@@ -1,23 +1,21 @@
 <?php
 
-namespace Brasileirao\Tabela;
+namespace Brasileirao\Domain;
 
 class Time
 {
     private $posicao;
     private $escudo;
     private $cidade;
-    private $pontos;
     private $vitorias;
     private $empates;
     private $derrotas;
 
-    public function __construct($posicao, $escudo, Cidade $cidade, $pontos, $vitorias, $empates, $derrotas)
+    public function __construct($posicao, $escudo, Cidade $cidade, $vitorias, $empates, $derrotas)
     {
         $this->posicao = $posicao;
         $this->escudo = $escudo;
         $this->cidade = $cidade;
-        $this->pontos = $pontos;
         $this->vitorias = $vitorias;
         $this->empates = $empates;
         $this->derrotas = $derrotas;
@@ -40,7 +38,7 @@ class Time
 
     public function pontos()
     {
-        return $this->pontos;
+        return $this->vitorias * 3 + $this->empates;
     }
 
     public function vitorias()
@@ -58,7 +56,7 @@ class Time
         return $this->derrotas;
     }
 
-    public function quantidadeDeJogos()
+    public function jogos()
     {
         return $this->vitorias +
             $this->derrotas +
@@ -70,12 +68,12 @@ class Time
         return [
             'posicao' => $this->posicao,
             'nome' => $this->cidade->nome(),
-            'pontos' => $this->pontos,
+            'pontos' => $this->pontos(),
             'vitorias' => $this->vitorias,
             'empates' => $this->empates,
             'escudo' => $this->escudo,
             'derrotas' => $this->derrotas,
-            'jogos' => $this->quantidadeDeJogos(),
+            'jogos' => $this->jogos(),
         ];
     }
 }

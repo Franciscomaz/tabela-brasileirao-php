@@ -1,13 +1,13 @@
 <?php
 
-namespace Brasileirao\Tabela;
+namespace Brasileirao\Domain;
 
+use Brasileirao\Helpers\Numero;
 use DOMElement;
 use DOMNodeList;
 use DOMDocument;
-use Brasileirao\Helpers\Numero;
 
-class TabelaBrasileiraoParser
+class Parser
 {
     const TABELA_URL = 'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-';
     private $documento;
@@ -34,7 +34,7 @@ class TabelaBrasileiraoParser
 
     private function criarTabela(DOMNodeList $linhas)
     {
-        $tabelaBrasileirao = new TabelaBrasileirao();
+        $tabelaBrasileirao = new Tabela();
         foreach ($linhas as $key => $linha) {
             if (Numero::isPar($key)) {
                 $tabelaBrasileirao->adicionarTime($this->criarTime($linha));
@@ -62,10 +62,6 @@ class TabelaBrasileiraoParser
             ->getElementsByTagName('img')
             ->item(0)
             ->getAttribute('src');
-        $pontos = $linha
-            ->getElementsByTagName('th')
-            ->item(0)
-            ->textContent;
         $vitorias = $celulasBody
             ->item(2)
             ->textContent;
@@ -75,10 +71,10 @@ class TabelaBrasileiraoParser
         $derrotas = $celulasBody
             ->item(4)
             ->textContent;
-        return new Time($this->limparPosicao($posicao), $escudo, $this->criarCidade($nome), $pontos, $vitorias, $empates, $derrotas);
+        return new Time($this->formatarPosicao($posicao), $escudo, $this->criarCidade($nome), $vitorias, $empates, $derrotas);
     }
 
-    private function limparPosicao($posicao)
+    private function formatarPosicao($posicao)
     {
         return str_replace('º', '', $posicao);
     }
